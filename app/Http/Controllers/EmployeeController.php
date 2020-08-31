@@ -24,8 +24,16 @@ use Illuminate\Support\Facades\Config;
 
 //validation
 use App\Http\Requests\StoreMarket;
+
 use Illuminate\Routing\Controller;
 
+/**
+     * Employee
+     * Author
+     * 25/8/2020
+     *
+     * 
+     */
 
 class EmployeeController extends Controller
 {
@@ -44,7 +52,7 @@ class EmployeeController extends Controller
         $employees=Employee::with('department','position')->withTrashed()->paginate($perPage);
         
 
-        // $employees=Employee::with('department','position')->onlyTrashed()->first();
+        
         return ['employees'=>$employees];
         
     }
@@ -124,11 +132,11 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the Employee List.
      * 
      * 27/8/2020
      *
-     * @param  int  $id
+     * @param  int  $id for employee 
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -142,7 +150,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the Employee.
      * 
      * 26/8/2020
      *

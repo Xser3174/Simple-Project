@@ -27,7 +27,7 @@ Route::apiResource('positions','PositionController');
 
 //Employee
 Route::apiResource('employees','EmployeeController');
-Route::delete('forceDelete/{id}','EmployeeController@forceDelete')->name('delete');
+Route::delete('employees/forceDelete/{id}','EmployeeController@forceDelete');
 Route::post('employees/search','EmployeeController@search');
 
 Route::get('EmployeesExport', 'EmployeeController@fileExport');
