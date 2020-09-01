@@ -14,7 +14,7 @@ use App\Emp_dep_position;
 use Maatwebsite\Excel\Facades\Excel;
 // use App\Imports\EmployeesImport;
 use App\Exports\EmployeesExport;
-
+// use Excel;
 
 //mail declaration** 
 use Illuminate\Support\Facades\Mail;
@@ -182,7 +182,7 @@ class EmployeeController extends Controller
             $employees->employee_name = $request->employee_name;
             $employees->email = $request->email;
             $employees->dob = $request->dob;
-            $employees->password = $request->password;
+            $employees->password = Hash::make($request->password);
             $employees->gender = $request->gender;
             $employees->update();
             

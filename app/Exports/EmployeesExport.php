@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Concerns\WithColumnWidth;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Illuminate\Support\Facades\Artisan;
 
+use Illuminate\Support\Facades\DB;
+
 
 /**
      * Export Excel
@@ -43,15 +45,27 @@ class EmployeesExport implements FromCollection, WithHeadings,WithTitle,ShouldAu
     */
     public function collection()
     {
+        
+        // $employee=$this->search_data;
+    //  dd($employee->id);
+        
+        // dd($employee);
         Artisan::call('cache:clear');
         Artisan::call('config:clear');
-        return Employee::select('employee_name','email','dob','password','gender')
-                        ->where($this->search_data)
-                        ->FirstOrFail();
+        // return Employee::select('id','employee_name','email','dob','password','gender')
+        //                 ->where($this->search_data)
+        //                 ->get();
+        return DB::table('employees')
+        ->join('emp_dep_positions', 'employees.id', '=', 'emp_dep_positions.employee_id')
+        ->join('positions', 'emp_dep_positions.position_id', '=', 'positions.id')
+        ->join('departments', 'emp_dep_positions.department_id', '=', 'departments.id')
+        // ->where('employees.employee_name',$employee)
+        ->select('employees.employee_name','employees.email','employees.dob', 'positions.position_name', 'departments.department_name')
+        ->get();
     }
     public function headings(): array
     {
-    return ["ID","Employee_name", "Email","DOB", "Password","Gender"];
+    return ["Employee_name", "Email","DOB", "Position Name","Department Name"];
     }
     public function title(): string
     {
