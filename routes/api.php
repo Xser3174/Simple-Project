@@ -31,4 +31,4 @@ Route::delete('employees/forceDelete/{id}','EmployeeController@forceDelete');
 Route::post('employees/search','EmployeeController@search');
 
 Route::get('EmployeesExport', 'EmployeeController@fileExport');
-// Route::post('excel', 'EmployeeController@excel')->name('export_excel.excel');
+Route::post('excel', 'EmployeeController@excel')->name('export_excel.excel');
