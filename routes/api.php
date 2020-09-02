@@ -32,3 +32,8 @@ Route::post('employees/search','EmployeeController@search');
 
 Route::get('EmployeesExport', 'EmployeeController@fileExport');
 Route::get('excel', 'EmployeeController@excel')->name('export_excel.excel');
+
+Route::get('save', 'EmployeeRegistrationController@save');
+Route::get('update', 'EmployeeRegistrationController@update');
+
+Route::get('save/position', 'PositionRegistrationController@save');

@@ -46,20 +46,21 @@ class EmployeesExport implements FromCollection, WithHeadings,WithTitle,ShouldAu
     public function collection()
     {
         
-        // $employee=$this->search_data;
-    //  dd($employee->id);
+        $employee=$this->search_data;
+    //  dd($key = array_search ('0', $this->search_data));
         
-        // dd($employee);
+        print_r($employee);
+        die();
         Artisan::call('cache:clear');
         Artisan::call('config:clear');
         // return Employee::select('id','employee_name','email','dob','password','gender')
-        //                 ->where($this->search_data)
+        //                 ->where($this->search_data) 
         //                 ->get();
         return DB::table('employees')
         ->join('emp_dep_positions', 'employees.id', '=', 'emp_dep_positions.employee_id')
         ->join('positions', 'emp_dep_positions.position_id', '=', 'positions.id')
         ->join('departments', 'emp_dep_positions.department_id', '=', 'departments.id')
-        // ->where('employees.employee_name',$employee)
+        ->where('employees.employee_name','=',$employee)
         ->select('employees.employee_name','employees.email','employees.dob', 'positions.position_name', 'departments.department_name')
         ->get();
     }
