@@ -50,13 +50,13 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
                 ]);
     }
-    public function checkEmployee($request)
-    {
-        $employeeId=$request->id;
-        $findEmployee=DB::table('employees')
-        ->leftjoin('emp_dep_positions','employees.id','=','emp_dep_positions.employee_id')
-        ->where('employee_id',$employeeId)
-        ->get();
-        return $findEmployee;
-    }
+    // public function checkEmployee($request)
+    // {
+    //     $employeeId=$request->id;
+    //     $findEmployee=DB::table('employees')
+    //     ->leftjoin('emp_dep_positions','employees.id','=','emp_dep_positions.employee_id')
+    //     ->where('employee_id',$employeeId)
+    //     ->get();
+    //     return $findEmployee;
+    // }
 }

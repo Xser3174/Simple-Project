@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Repositories\Interfaces\EmployeeDepartmentPositionRepositoryInterface;
-//use Your Model
 use App\Emp_dep_position;
+//use Your Model
+use Illuminate\Support\Facades\DB;
+use App\Repositories\Interfaces\EmployeeDepartmentPositionRepositoryInterface;
 /**
  * Class EmployeeDepartmentPositionRepository.
  */
@@ -25,10 +26,12 @@ class EmployeeDepartmentPositionRepository implements EmployeeDepartmentPosition
 
     public function updateEmployeeDep($employeeId, $position_id, $department_id)
     {
-        $emp=Emp_dep_position::where('employee_id',$employeeId)->first();
-        $emp->department_id =$department_id;
-        $emp->position_id =$position_id;
-        $emp->update();
-        
+        DB::table('employees')
+        ->leftjoin('emp_dep_positions','employees.id','=','emp_dep_positions.employee_id')
+        ->where('employee_id',$employeeId)
+        ->update([
+            'position_id' => $position_id,
+            'department_id' => $department_id,
+            ]);
     }
 }

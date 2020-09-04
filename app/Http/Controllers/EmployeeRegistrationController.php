@@ -28,10 +28,10 @@ class EmployeeRegistrationController extends Controller
 
     public function update(EmployeeUpdatingValidationRequest $request)
     {
-        $employee=$this->employeeRepo->checkEmployee($request);
+        $employee=$this->employeelogic->checkEmployee($request);
         if($employee->isEmpty())
         {
-            return reponse()->json(['message'=>"Data is not Found"],200);
+            return response()->json(['message'=>"Data is not Found"],200);
         }else{
             $this->employeeRepo->updateEmployee($request);
             $this->employeelogic->updatePrepaupreData($request);

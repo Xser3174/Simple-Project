@@ -2,9 +2,10 @@
 
 namespace App\Repositories\Logics;
 
-use App\Repositories\Interfaces\EmployeeDepartmentPositionRepositoryInterface;
 use App\Employee;
 use App\Emp_dep_position;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\Interfaces\EmployeeDepartmentPositionRepositoryInterface;
 
 // use Illuminate\Support\Facades\Log;
 
@@ -64,6 +65,16 @@ class EmployeeRepositoryLogic
                 
         
         
+    }
+
+    public function checkEmployee($request)
+    {
+        $employeeId=$request->id;
+        $findEmployee=DB::table('employees')
+        ->leftjoin('emp_dep_positions','employees.id','=','emp_dep_positions.employee_id')
+        ->where('employee_id',$employeeId)
+        ->get();
+        return $findEmployee;
     }
 
     // public function checkEmployee($request)
